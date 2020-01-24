@@ -5,6 +5,7 @@
         <title>Nikola's blog</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <!-- Popper JS -->
@@ -33,7 +34,7 @@
 
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">HOME</a>
+                    <a class="nav-link" href="index.html">HOME</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
@@ -48,7 +49,7 @@
                     <a class="nav-link" href="about.html">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">CONTACT</a>
+                    <a class="nav-link" href="#">CONTACT</a>
                 </li>
                 <li class="nav-item">
                     <a onclick="openSearch()" class="nav-link" href="#">SEARCH</a>
@@ -58,7 +59,7 @@
          
             </div><!-- container -->
              </nav>
-             <div id="myOverlay" class="overlay popup">
+            <div id="myOverlay" class="overlay popup">
                 <span class="closebtn" onclick="closeSearch()">x</span>
                 <div class="overlay-content">
                   <form action="action_page.php">
@@ -66,35 +67,34 @@
                   </form>
                 </div>
               </div>
-             <div class="container" id="mainContent">
-                    <h1 align="center"><em>Read</em> about the latest <br> news in <strong>programming</strong></h1>
+            <div class="container" id="mainContent">
+                <div class="container" align="center">
+                    <h1 align="center">CONTACT me</h1>
                     <br>
-                    <div class="container mt-5" align="center">
-                        <div class="card-deck w-xl-75 w-sm-100">
-                            <div id="card1" class="card bg-c-blue">
-                                <div class="card-body text-left">
-                                    <p class="card-text">macOS</p>
-                                </div>
-                            </div>
-                            <div class="card bg-c-orange">
-                                <div class="card-body text-left">
-                                    <p class="card-text">iOS</p>
-                                </div>
-                            </div>
-                            <div class="card bg-c-red">
-                                <div class="card-body text-left">
-                                    <p class="card-text">WindowsForms</p>
-                                </div>
-                            </div>
-                            <div class="card bg-c-violet">
-                                <div class="card-body text-left">
-                                    <p class="card-text">WPF</p>
-                                </div>
-                            </div> 
-                        </div>
-                    </div><!-- container -->
-             </div><!-- container -->
-
+                    <p align="center">I would love to hear from you, let's get in touch!</p>
+                    <br>
+                    <a href="mailto:grujicnikola91@gmail.com" class="mailto"><strong>grujicnikola91@gmail.com</strong></a>
+                    <br>
+                    <br>
+                    <a id="linkedin" href="https://www.linkedin.com/in/nikola-grujic-735a7284/"><i class="fa fa-linkedin"></i></a>
+                    <a id="gitHub" href="http://github.com/nikolagrujic"><i class="fa fa-github"></i></a>
+                    <a id="skype" href="http://github.com/nikolagrujic"><i class="fa fa-skype"></i></a>
+                    <a id="facebook" href="https://www.facebook.com/nikola.grujicgruja.3"><i class="fa fa-facebook"></i></a>
+                    <br>
+                    <button id="messageButton" class="button" onclick="sendMessage()">Send me a message</button>
+                </div>
+            </div>
+            <div id="myOverlayMessage" class="overlay popleft">
+                <span class="closebtn" onclick="closeMessage()">x</span>
+                <div class="overlay-content">
+                  <form action="action_page.php">
+                    <input align="center" type="text" placeholder="Your name" name="name">
+                  </form>
+                  <form action="action_page.php">
+                    <input align="center" type="text" placeholder="Message" name="message">
+                  </form>
+                </div>
+              </div>
             
     </body>
 

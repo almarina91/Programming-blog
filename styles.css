@@ -1,8 +1,12 @@
 body{
     background: -webkit-linear-gradient(left, #384C5A, #384C5A);
-    background: linear-gradient(to right, #353a7d, #3CCBCD);
+    background: linear-gradient(to right, #3CCBCD, #353a7d);
     font-family: 'Roboto', sans-serif;
     color:white;
+}
+
+.navbar-brand {
+    font-family: 'Londrina Outline', cursive;
 }
 
 .navbar.transparent.navbar-inverse .navbar-inner {
@@ -16,20 +20,42 @@ body{
 }
 
 .bg-c-blue {
-    background: linear-gradient(45deg,#73b4ff,#fdc374);
+    background-color: #f98f68;
+    background-image: linear-gradient(315deg, #f98f68 0%, #FBAB7E 50%, #F7CE68 100%);  
+    opacity: .7;
+    border-radius: 20px;
+         
 }
+
+#card1 :hover {
+    opacity: 1;
+}
+
 
 .bg-c-orange {
-    background: linear-gradient(45deg,#fdc374,#fb7869);
+    background-color: #8BC6EC;
+    background-image: linear-gradient(135deg, #8BC6EC 0%, #9b9cad 100%);
+    opacity: .7;
+    border-radius: 20px;
+   
 }
+
 
 .bg-c-red {
-    background: linear-gradient(45deg,#b3335f,#af96c9);
+    background-color: #0093E9;
+    background-image: linear-gradient(315deg, #0093E9 0%, #80D0C7 100%);  
+    opacity: .7;  
+    border-radius: 20px;
 }
 
+
+
 .bg-c-violet {
-    background: linear-gradient(45deg,#af96c9,#73b4ff);
+    background-image: linear-gradient(175deg, #F4D03F 0%, #16A085 100%);
+    opacity: .7;
+    border-radius: 20px;
 }
+
 
 .bg-c-transparent {
     background: none;
@@ -38,3 +64,219 @@ body{
     border-radius: 5px;
 }
 
+.card-columns {
+    @include media-breakpoint-only(lg) {
+      column-count: 4;
+    }
+    @include media-breakpoint-only(xl) {
+      column-count: 5;
+    }
+  }
+
+  .dropdown-menu {
+      background-color: transparent;
+    }
+
+    .dropdown-item {
+        color:white;
+      }
+
+
+    .outline {
+        color:transparent;
+        text-shadow: #ffffff 0px 0px 1px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    #mainContent {
+        margin-top: 150px;
+    }
+
+    /* The overlay effect with black background */
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9); /* Black with a little bit see-through */
+}
+
+/* The content */
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+/* Close button */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+/* Style the search field */
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type=text]:hover {
+  background: #f1f1f1;
+}
+
+/* Style the submit button */
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
+}/* The overlay effect with black background */
+.overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(209, 208, 208, 0.8);
+  }
+  
+  /* The content */
+  .overlay-content {
+    position: relative;
+    top: 46%;
+    width: 80%;
+    text-align: center;
+    margin-top: 30px;
+    margin: auto;
+  }
+  
+  /* Close button */
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .overlay .closebtn:hover {
+    color: #ccc;
+  }
+  
+  /* Style the search field */
+  .overlay input[type=text] {
+    padding: 15px;
+    font-size: 17px;
+    border: none;
+    border-radius: 20px;
+    float: center;
+    width: 100%;
+    background: white;
+  }
+  
+  .overlay input[type=text]:hover {
+    background: #f1f1f1;
+  }
+  
+  
+  .overlay button:hover {
+    background: #bbb;
+  }
+
+
+@keyframes popup {
+    from {
+        height: 0%;
+    } to {
+        height: 100%;
+    }
+}
+
+.popup {
+    animation-name: popup;
+    animation-duration: 1s;
+}
+
+#messageButton {
+    margin-top: 50px;
+    border-radius: 20px;
+    border-color: white;
+    background: transparent;
+    color: white;
+    
+}
+
+@keyframes popleft {
+    from {
+        width: 0%;
+    } to {
+        width: 100%;
+    }
+}
+
+.popleft {
+    animation-name: popleft;
+    animation-duration: 1s;
+}
+
+.mailto {
+    font-size: 25px;
+    color: white;
+}
+
+#linkedin {
+    color:white;
+    margin-top:50px;
+    font-size: 40px;
+    margin-left: 20px;
+}
+
+#gitHub {
+    color:white;
+    margin-top:50px;
+    font-size: 40px;
+    margin-left: 20px;
+}
+
+#skype {
+    color:white;
+    margin-top:50px;
+    font-size: 40px;
+    margin-left: 20px;
+}
+#facebook {
+    color:white;
+    margin-top:50px;
+    margin-left: 20px;
+    font-size: 40px;
+}
