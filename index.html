@@ -14,8 +14,9 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
         <script src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="animate.css">
     </head>
-    <body>
+    <body class="mainPage">
         <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
            <div class="container">
             <div class="navbar-brand">NIKOLA'S BLOG</div>
@@ -38,10 +39,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">macOS</a>
-                            <a class="dropdown-item" href="#">iOS</a>
-                            <a class="dropdown-item" href="#">WindowsForms</a>
-                            <a class="dropdown-item" href="#">WPF</a>
+                            <a id="macOSdd" class="dropdown-item" href="macOS.html">macOS</a>
+                            <a id="iOSdd" class="dropdown-item" href="iOS.html">iOS</a>
+                            <a id="WindowsFormsdd" class="dropdown-item" href="WindowsForms.html">WindowsForms</a>
+                            <a id="WPFdd" class="dropdown-item" href="WPF.html">WPF</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -58,7 +59,7 @@
          
             </div><!-- container -->
              </nav>
-             <div id="myOverlay" class="overlay popup">
+             <div id="myOverlay" class="overlay animated jackInTheBox">
                 <span class="closebtn" onclick="closeSearch()">x</span>
                 <div class="overlay-content">
                   <form action="action_page.php">
@@ -67,28 +68,28 @@
                 </div>
               </div>
              <div class="container" id="mainContent">
-                    <h1 align="center"><em>Read</em> about the latest <br> news in <strong>programming</strong></h1>
+                    <h1 align="center"><strong>UI Frameworks</strong><br>tips, trick <em>&</em> snippets</h1>
                     <br>
                     <div class="container mt-5" align="center">
                         <div class="card-deck w-xl-75 w-sm-100">
-                            <div id="card1" class="card bg-c-blue">
+                            <div id="card1" class="card bg-c-blue animated flipInX">
                                 <div class="card-body text-left">
-                                    <p class="card-text">macOS</p>
+                                    <a href="macOS.html" style="color: white; text-decoration: none;" class="card-text stretched-link">macOS</a>
                                 </div>
                             </div>
-                            <div class="card bg-c-orange">
+                            <div class="card bg-c-orange animated flipInX">
                                 <div class="card-body text-left">
-                                    <p class="card-text">iOS</p>
+                                    <a href="iOS.html" style="color: white; text-decoration: none;" class="card-text stretched-link">iOS</a>
                                 </div>
                             </div>
-                            <div class="card bg-c-red">
+                            <div class="card bg-c-red animated flipInX">
                                 <div class="card-body text-left">
-                                    <p class="card-text">WindowsForms</p>
+                                    <a href="WindowsForms.html" style="color: white; text-decoration: none;" class="card-text stretched-link">WindowsForms</a>
                                 </div>
                             </div>
-                            <div class="card bg-c-violet">
+                            <div class="card bg-c-violet animated flipInX">
                                 <div class="card-body text-left">
-                                    <p class="card-text">WPF</p>
+                                    <a href="WPF.html" style="color: white; text-decoration: none;" class="card-text stretched-link">WPF</a>
                                 </div>
                             </div> 
                         </div>

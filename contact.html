@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
         <script src="script.js"></script>
+        <link rel="stylesheet" type="text/css" href="animate.css">
     </head>
     <body>
         <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
@@ -30,19 +31,19 @@
                     <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent1">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
 
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">HOME</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">macOS</a>
-                        <a class="dropdown-item" href="#">iOS</a>
-                        <a class="dropdown-item" href="#">WindowsForms</a>
-                        <a class="dropdown-item" href="#">WPF</a>
+                        <a id="macOSdd" class="dropdown-item" href="macOS.html">macOS</a>
+                        <a id="iOSdd" class="dropdown-item" href="iOS.html">iOS</a>
+                        <a id="WindowsFormsdd" class="dropdown-item" href="WindowsForms.html">WindowsForms</a>
+                        <a id="WPFdd" class="dropdown-item" href="WPF.html">WPF</a>
                       </div>
                 </li>
                 <li class="nav-item">
@@ -59,7 +60,7 @@
          
             </div><!-- container -->
              </nav>
-            <div id="myOverlay" class="overlay popup">
+            <div id="myOverlay" class="overlay animated jackInTheBox">
                 <span class="closebtn" onclick="closeSearch()">x</span>
                 <div class="overlay-content">
                   <form action="action_page.php">
@@ -76,15 +77,14 @@
                     <a href="mailto:grujicnikola91@gmail.com" class="mailto"><strong>grujicnikola91@gmail.com</strong></a>
                     <br>
                     <br>
-                    <a id="linkedin" href="https://www.linkedin.com/in/nikola-grujic-735a7284/"><i class="fa fa-linkedin"></i></a>
-                    <a id="gitHub" href="http://github.com/nikolagrujic"><i class="fa fa-github"></i></a>
-                    <a id="skype" href="http://github.com/nikolagrujic"><i class="fa fa-skype"></i></a>
-                    <a id="facebook" href="https://www.facebook.com/nikola.grujicgruja.3"><i class="fa fa-facebook"></i></a>
+                    <a id="linkedin" href="https://www.linkedin.com/in/nikola-grujic-735a7284/"><i class="fa fa-linkedin animated flipInX"></i></a>
+                    <a id="gitHub" href="http://github.com/nikolagrujic"><i class="fa fa-github animated flipInX"></i></a>
+                    <a id="facebook" href="https://www.facebook.com/nikola.grujicgruja.3"><i class="fa fa-facebook animated flipInX"></i></a>
                     <br>
                     <button id="messageButton" class="button" onclick="sendMessage()">Send me a message</button>
                 </div>
             </div>
-            <div id="myOverlayMessage" class="overlay popleft">
+            <div id="myOverlayMessage" class="overlay animated jackInTheBox">
                 <span class="closebtn" onclick="closeMessage()">x</span>
                 <div class="overlay-content">
                   <form action="action_page.php">

@@ -6,6 +6,7 @@ function openSearch() {
   // Close the full screen search box 
   function closeSearch() {
     document.getElementById("myOverlay").style.display = "none";
+    
   }
 
   function sendMessage() {
