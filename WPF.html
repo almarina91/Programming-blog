@@ -16,7 +16,7 @@
         <script src="script.js"></script>
         <link rel="stylesheet" type="text/css" href="animate.css">
     </head>
-    <body>
+    <body class="WPFpage">
         <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
            <div class="container">
             <div class="navbar-brand">NIKOLA'S BLOG</div>
@@ -57,20 +57,55 @@
                 </ul>
              </div> <!-- collapse -->
             </div><!-- container -->
-             </nav>
-             <div id="myOverlay" class="overlay animated jackInTheBox">
+            </nav>
+            <div id="myOverlay" class="overlay animated jackInTheBox">
                 <span class="closebtn" onclick="closeSearch()">x</span>
                 <div class="overlay-content">
                   <form action="action_page.php">
                     <input align="center" type="text" placeholder="Search for.." name="search">
                   </form>
                 </div>
-              </div>
+            </div>
 
-              <div class="container" id="WPFHeader">
+            <div class="container" id="mainContent">
                 <h1 align="center">WPF</h1>
                 <br>
-                </div>
+                <div class="navAndPosts">
+                    <div class="posts">
+                        <ul class="nav navbar-nav navbar-custom navbar-expand justify-content-center">
+                            <li class="navbar-item navbar-item-center">
+                                <a class="nav-link link-margin active" data-toggle="tab" href="#mostRecent" id="mostRecent">MOST RECENT</a>
+                            </li>
+                            <li class="navbar-item navbar-item-center">
+                                <a class="nav-link link-margin" data-toggle="tab" href="#popular" id="popular">POPULAR</a>
+                            </li>
+                        </ul>
+                        <br>
+                        <div class="tab-content">
+                            <div class="list-group list-group-flush tab-pane container active" id="mostRecent">
+                                <a href="#" class="list-group-item list-group-item-action">Eighth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Seventh post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Sixth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Fifth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Fourth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Third post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Second post</a>
+                                <a href="#" class="list-group-item list-group-item-action">First post</a>
+                            </div><!-- mostRecent -->
+                            <div class="list-group list-group-flush tab-pane container" id="popular">
+                                <a href="#" class="list-group-item list-group-item-action">First post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Second post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Third post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Fourth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Fifth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Sixth post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Seventh post</a>
+                                <a href="#" class="list-group-item list-group-item-action">Eighth post</a>
+                            </div><!-- popular -->
+                        </div> <!-- tab-content -->
+                    </div><!-- posts -->
+                </div><!-- anvAndPosts -->
+            </div><!-- main-container -->
     </body>
 
 

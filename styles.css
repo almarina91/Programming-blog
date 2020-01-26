@@ -10,6 +10,58 @@
   background: linear-gradient(to right, #F7CE68, #FBAB7E);
   font-family: 'Roboto', sans-serif;
   color:white;
+  padding: 0px;
+  margin: 0px;
+}
+
+.iOSpage {
+  background: -webkit-linear-gradient(left, #384C5A, #384C5A);
+  background: linear-gradient(to right, #8BC6EC , #9b9cad);
+  font-family: 'Roboto', sans-serif;
+  color:white;
+}
+
+.WindowsFormspage {
+  background: -webkit-linear-gradient(left, #384C5A, #384C5A);
+  background: linear-gradient(to right, #80D0C7, #0093E9);
+  font-family: 'Roboto', sans-serif;
+  color:white;
+}
+
+.WPFpage {
+  background: -webkit-linear-gradient(left, #384C5A, #384C5A);
+  background: linear-gradient(to right, #F4D03F, #16A085);
+  font-family: 'Roboto', sans-serif;
+  color:white;
+}
+
+.navAndPosts {
+  width: 100vw;
+  position: relative;
+  margin-left: -50vw;
+  height: 100px;
+  margin-top: 100px;
+  left: 50%;
+}
+
+.link-margin {
+  margin-right: 10px;
+}
+
+.posts {
+  background: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.navbar-custom {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+}
+
+.navbar-item-center {
+  display: inline-block;
 }
 
 .navbar-brand {
