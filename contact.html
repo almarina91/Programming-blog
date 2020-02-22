@@ -91,12 +91,11 @@
             <div id="myOverlayMessage" class="overlay animated jackInTheBox">
                 <span class="closebtn" onclick="closeMessage()">x</span>
                 <div class="overlay-content">
-                  <form action="action_page.php">
-                    <input align="center" type="text" placeholder="Your name" name="name">
+                  <form>
+                    <input id="name" align="center" type="text" placeholder="Your name" name="name">
+                    <input id="message" align="center" type="text" placeholder="Message" name="message">
                   </form>
-                  <form action="action_page.php">
-                    <input align="center" type="text" placeholder="Message" name="message">
-                  </form>
+                  <button onclick="sendMail(); return false">Send</button>
                 </div>
               </div>
             

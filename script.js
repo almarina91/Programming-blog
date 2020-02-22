@@ -16,3 +16,12 @@ function openSearch() {
   function closeMessage() {
     document.getElementById("myOverlayMessage").style.display = "none";
   }
+
+  function sendMail() {
+    var link = "mailto:grujic.nikola91@gmail.com"
+             + "?cc="
+             + "&subject=" + escape("Blog message")
+             + "&body=" + escape(document.getElementById('message').value);
+
+    window.location.href = link;
+}
