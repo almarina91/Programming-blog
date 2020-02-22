@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Nikola's blog</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
+        <script src="../script.js"></script>
+        <link rel="stylesheet" type="text/css" href="../animate.css">
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="stylesheet" type="text/css" href="../codestyle.css">
+    </head>
+    <body class="otherPages">
+        <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
+           <div class="container">
+            <div class="navbar-brand">NG</div>
+            <button class="navbar-toggler toggler-example" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarSupportedContent1"
+                    aria-controls="navbarSupportedContent1" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
+                    <div class="dropdown-menu">
+                        <a id="macOSdd" class="dropdown-item" href="../macOS.html">macOS</a>
+                        <a id="iOSdd" class="dropdown-item" href="../iOS.html">iOS</a>
+                        <a id="WindowsFormsdd" class="dropdown-item" href="../WindowsForms.html">WindowsForms</a>
+                        <a id="WPFdd" class="dropdown-item" href="../WPF.html">WPF</a>
+                      </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="openSearch()" class="nav-link" href="#">SEARCH</a>
+                </li>
+                </ul>
+             </div> <!-- collapse -->
+            </div><!-- container -->
+            </nav>
+            <div id="myOverlay" class="overlay animated jackInTheBox">
+                <span class="closebtn" onclick="closeSearch()">x</span>
+                <div class="overlay-content">
+                  <form>
+                    <input align="center" type="text" placeholder="Search for.." name="search">
+                  </form>
+                </div>
+            </div>
+           
+<div class="containerPage row h-100 justify-content-center">
+    <div class="col-sm-6" id="mainContent">
+        <h1>Cocoa Web View Load Local File</h1>
+        <p>
+            This post is part of Cocoa UI examples series.
+            </br></br>
+            It covers implementation of loading local .html file in WKWebView. 
+            </br></br>
+            Example is built on macOS Catalina and Xcode 11.3.
+            </br></br>
+            <a>GitHub | Repository name</a>
+        </p>
+        <h2>Enabling outgoing connections</h2>
+        <p>
+            In order to use web view it is neccessary to enable <em>Outgoing connections (Client)</em> in <em>Signing & Capabilities</em>
+            tab of project settings
+            <br><br>
+            <img width="500" height="400" src="images/post2/App2.png">
+        </p>
+        <h2>Add local html file as project resource</h2>
+        <p>
+            In order to load local file it is neccessary to add file as a resource to project.
+            <br><br>
+            In Build Phases settings of project, file needs to show up under Copy Bundle Resources.
+            <br><br>
+            <img width="700" height="250" src="images/post2/App3.png">
+        </p>
+        <h2>Add controls</h2>
+        <p>
+            In the Interface Builder add Web View.
+            <br><br>
+            It should look like this in the end.
+            <br><br>
+            <img width="500" height="400" src="images/post2/App.png">
+        </p>
+        <h2>AppDelegate</h2>
+        <p>
+        <figure>
+            <figcaption>AppDelegate.h</figcaption>
+            <pre class="prettyprint">
+                <code>
+#import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
+
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+
+@property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet WKWebView *webView;
+
+- (void)LoadFile;
+
+@end
+                </code>
+            </pre>
+        </figure>
+        <figure>
+            <figcaption>AppDelegate.m</figcaption>
+                <pre class="prettyprint">
+                    <code>
+#import "AppDelegate.h"
+
+@implementation AppDelegate
+
+- (void)awakeFromNib
+{
+    [self LoadFile];
+}
+
+- (void)LoadFile
+{
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *filePath = [mainBundle pathForResource:@"example" ofType:@"html"];
+
+    NSURL *url = [NSURL fileURLWithPath:filePath];
+
+    [_webView loadFileURL:url allowingReadAccessToURL:[url URLByDeletingLastPathComponent]];
+}
+
+@end
+                    </code>
+                </pre>
+        </figure>
+    </p>
+</div>
+</div>
+</body>
+</html>

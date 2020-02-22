@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Nikola's blog</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
+        <script src="../script.js"></script>
+        <link rel="stylesheet" type="text/css" href="../animate.css">
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="stylesheet" type="text/css" href="../codestyle.css">
+    </head>
+    <body class="otherPages">
+        <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
+           <div class="container">
+            <div class="navbar-brand">NG</div>
+            <button class="navbar-toggler toggler-example" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarSupportedContent1"
+                    aria-controls="navbarSupportedContent1" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
+                    <div class="dropdown-menu">
+                        <a id="macOSdd" class="dropdown-item" href="../macOS.html">macOS</a>
+                        <a id="iOSdd" class="dropdown-item" href="../iOS.html">iOS</a>
+                        <a id="WindowsFormsdd" class="dropdown-item" href="../WindowsForms.html">WindowsForms</a>
+                        <a id="WPFdd" class="dropdown-item" href="../WPF.html">WPF</a>
+                      </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="openSearch()" class="nav-link" href="#">SEARCH</a>
+                </li>
+                </ul>
+             </div> <!-- collapse -->
+            </div><!-- container -->
+            </nav>
+            <div id="myOverlay" class="overlay animated jackInTheBox">
+                <span class="closebtn" onclick="closeSearch()">x</span>
+                <div class="overlay-content">
+                  <form>
+                    <input align="center" type="text" placeholder="Search for.." name="search">
+                  </form>
+                </div>
+            </div>
+           
+<div class="containerPage row h-100 justify-content-center">
+    <div class="col-sm-6" id="mainContent">
+        <h1>Cocoa - Slider Binding</h1>
+        <p>
+            This post is part of Cocoa UI examples series.
+            </br></br>
+            It covers the implementation of two way binding of <em>NSSlider</em>
+            with instance variable of the delegate object.
+            </br></br>
+            Example is built on macOS Catalina and Xcode 11.3.
+            </br></br>
+            <a>GitHub | Repository name</a>
+        </p>
+        <h2>Add controls</h2>
+        <p>
+            In the Interface Builder vertical slider, two buttons and a label
+            have to be added to MainMenu.xib window.
+            <br><br>
+            It should look like this in the end.
+            <br><br>
+            <img width="500" height="400" src="images/post4/App.png">
+        </p>
+        <h2>Two way binding</h2>
+        <p>
+            Alternative to binding delegate variable with NSSlider through Interface Builder
+            is to do it programmatically.
+            <br><br>
+            In order to update slider value when delegate instance variable <em>sliderValue</em>
+            is changed, and to update delegate instance variable <em>sliderValue</em> when
+            slider value is changed through user interface it is neccessary to set
+            two way binding.
+            <br><br>
+            It is set in <em>awakeFromNib</em> when window object comes to life.
+            <figure>
+                <figcaption>Two way binding</figcaption>
+                <pre class="prettyprint">
+                <code>
+// Programmatically set two way binding between NSSlider value and
+// delegate sliderValue variable
+[_slider bind:@"value"
+    toObject:self
+withKeyPath:@"sliderValue"
+    options:@{@"NSContinuouslyUpdatesValue":@YES,
+                @"NSAllowsEditingMultipleValuesSelectionBindingOption":@YES,
+                @"NSConditionallySetsEditableBindingOption":@YES,
+                @"NSRaisesForNotApplicableKeysBindingOption":@YES}];
+
+[self bind:@"sliderValue"
+toObject:_slider
+withKeyPath:@"value"
+    options:@{@"NSContinuouslyUpdatesValue":@YES,
+            @"NSAllowsEditingMultipleValuesSelectionBindingOption":@YES,
+            @"NSConditionallySetsEditableBindingOption":@YES,
+            @"NSRaisesForNotApplicableKeysBindingOption":@YES}];
+                </code>
+                </pre>
+            </figure>
+        </p>
+        <h2>Notify observers</h2>
+        <p>
+        When changing delegate instance variable <em>sliderValue</em> programmatically
+        in <em>increment</em> and <em>decrement</em> functions, it is neccessary to
+        send notification to the observers.
+        <figure>
+            <figcaption>Trigger notification</figcaption>
+            <pre class="prettyprint">
+                <code>
+[self willChangeValueForKey:@"sliderValue"];
+sliderValue--;
+[self didChangeValueForKey:@"sliderValue"];
+                </code>
+            </pre>
+            </figure>
+        </p>
+        <h2>AppDelegate class complete implementation</h2>
+        <p>
+            <figure>
+                <figcaption>AppDelegate.h</figcaption>
+                <pre class="prettyprint">
+                <code>
+#import <Cocoa/Cocoa.h>
+
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+{
+    NSInteger sliderValue;
+}
+
+@property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSSlider *slider;
+@property (weak) IBOutlet NSTextField *label;
+@property (weak) IBOutlet NSButton *incrementButton;
+@property (weak) IBOutlet NSButton *decrementButton;
+
+- (IBAction)increment:(id)sender;
+- (IBAction)decrement:(id)sender;
+- (void)sliderValueChanged;
+- (void)updateLabel;
+
+@end
+                </code>
+                </pre>
+            </figure>
+            <figure>
+                <figcaption>AppDelegate.m</figcaption>
+                <pre class="prettyprint">
+                <code>
+#import "AppDelegate.h"
+
+@implementation AppDelegate
+
+- (void)awakeFromNib
+{
+    sliderValue = 50;
+
+    // Programmatically set two way binding between NSSlider value and
+    // delegate sliderValue variable
+    [_slider bind:@"value"
+        toObject:self
+    withKeyPath:@"sliderValue"
+        options:@{@"NSContinuouslyUpdatesValue":@YES,
+                    @"NSAllowsEditingMultipleValuesSelectionBindingOption":@YES,
+                    @"NSConditionallySetsEditableBindingOption":@YES,
+                    @"NSRaisesForNotApplicableKeysBindingOption":@YES}];
+    
+    [self bind:@"sliderValue"
+    toObject:_slider
+    withKeyPath:@"value"
+        options:@{@"NSContinuouslyUpdatesValue":@YES,
+                @"NSAllowsEditingMultipleValuesSelectionBindingOption":@YES,
+                @"NSConditionallySetsEditableBindingOption":@YES,
+                @"NSRaisesForNotApplicableKeysBindingOption":@YES}];
+    
+    // Programmatically set action method for NSSlider
+    [_slider setTarget:self];
+    [_slider setAction:@selector(sliderValueChanged)];
+}
+
+#pragma mark Action methods
+
+- (IBAction)increment:(id)sender
+{
+    if (sliderValue == 100)
+    {
+        return;
+    }
+    
+    //When changing variable directly explicitly
+    //trigger the notification to the observers
+    [self willChangeValueForKey:@"sliderValue"];
+    sliderValue++;
+    [self didChangeValueForKey:@"sliderValue"];
+    
+    [self updateLabel];
+}
+
+- (IBAction)decrement:(id)sender
+{
+    if (sliderValue == 0)
+    {
+        return;
+    }
+    
+    //When changing variable directly explicitly
+    //trigger the notification to the observers
+    [self willChangeValueForKey:@"sliderValue"];
+    sliderValue--;
+    [self didChangeValueForKey:@"sliderValue"];
+    
+    [self updateLabel];
+}
+
+- (void)sliderValueChanged
+{
+    [self updateLabel];
+}
+
+- (void)updateLabel
+{
+    [_label setStringValue:[NSString stringWithFormat:@"%d", (int)sliderValue]];
+}
+
+@end
+                </code>
+                </pre>
+            </figure>
+        </p>
+</div>
+</div>
+</body>
+</html>

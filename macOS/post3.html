@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Nikola's blog</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Bad+Script&display=swap" rel="stylesheet">
+        <script src="../script.js"></script>
+        <link rel="stylesheet" type="text/css" href="../animate.css">
+        <link rel="stylesheet" type="text/css" href="../styles.css">
+        <link rel="stylesheet" type="text/css" href="../codestyle.css">
+    </head>
+    <body class="otherPages">
+        <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
+           <div class="container">
+            <div class="navbar-brand">NG</div>
+            <button class="navbar-toggler toggler-example" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#navbarSupportedContent1"
+                    aria-controls="navbarSupportedContent1" 
+                    aria-expanded="false" 
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">HOME</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="#">ARTICLES</a>
+                    <div class="dropdown-menu">
+                        <a id="macOSdd" class="dropdown-item" href="../macOS.html">macOS</a>
+                        <a id="iOSdd" class="dropdown-item" href="../iOS.html">iOS</a>
+                        <a id="WindowsFormsdd" class="dropdown-item" href="../WindowsForms.html">WindowsForms</a>
+                        <a id="WPFdd" class="dropdown-item" href="../WPF.html">WPF</a>
+                      </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">ABOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../contact.html">CONTACT</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="openSearch()" class="nav-link" href="#">SEARCH</a>
+                </li>
+                </ul>
+             </div> <!-- collapse -->
+            </div><!-- container -->
+            </nav>
+            <div id="myOverlay" class="overlay animated jackInTheBox">
+                <span class="closebtn" onclick="closeSearch()">x</span>
+                <div class="overlay-content">
+                  <form>
+                    <input align="center" type="text" placeholder="Search for.." name="search">
+                  </form>
+                </div>
+            </div>
+           
+<div class="containerPage row h-100 justify-content-center">
+    <div class="col-sm-6" id="mainContent">
+        <h1>Cocoa - Speech Syntesizer</h1>
+        <p>
+            This post is part of Cocoa UI examples series.
+            </br></br>
+            It covers the implementation of application that uses speech synthesizer (<em>NSSpeechSynthesizer</em>)
+            and cell based table view (<em>NSTableView</em>).
+            </br></br>
+            Example is built on macOS Catalina and Xcode 11.3.
+            </br></br>
+            <a>GitHub | Repository name</a>
+        </p>
+        <h2>Add controls</h2>
+        <p>
+            In the Interface Builder text field, two buttons and a table view 
+            have to be added to MainMenu.xib window.
+            <br><br>
+            It should look like this in the end.
+            <br><br>
+            <img width="900" height="400" src="images/post3/App.png">
+        </p>
+        <h2>Speech synthesizer</h2>
+        <p>
+            An instance variable name <em>speechSynthesizer</em> of type <em>NSSpeechSynthesizer</em> is 
+            added to <em>AppDelegate</em> class and instantiated in <em>init</em> function.
+            <br><br>
+            Functions <a href="#speakmethod"><em>speak</em></a> and <a href="#stopmethod"><em>stop</em></a> handle the work of speech synthesizer. 
+            <br><br>
+            In order to enable speak button when speech synthesizer stops, one of the three messages
+            that speech synthesizer sends to its delegate must be implemented. That is <em>speechSynthesizer:didFinishSpeaking</em>
+
+            <figure>
+                <figcaption></figcaption>
+                <pre class="prettyprint">
+                    <code>
+// Sent when an NSSpeechSynthesizer object finishes speaking through the sound output device.
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender
+        didFinishSpeaking:(BOOL)finishedSpeaking
+{
+    [_speakButton setEnabled:YES];
+    [_stopButton setEnabled:NO];
+    [_tableView setEnabled:YES];
+}
+                    </code>
+                </pre>
+            </figure>
+        </p>
+        <h2>Table view</h2>
+        <p>
+            Table view displays columns of data. 
+            It is of type <em>NSTableView</em> and has a helper object <em>dataSource</em>.
+            The data source must conform to the <em>NSTableDataSource</em> protocol, meaning
+            that delegate must have these two methods:
+            <figure>
+                <figcaption></figcaption>
+                <pre class="prettyprint">
+                <code>
+//Returns the number of records managed for aTableView by the data source object.
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return (NSInteger)[voices count];
+}
+
+//Called by the table view to return the data object associated
+//with the specified row and column.
+- (id)tableView:(NSTableView *)tableView
+objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row
+{
+    NSString *voice = [voices objectAtIndex:row];
+    NSDictionary *voicesDictionary = [NSSpeechSynthesizer attributesForVoice:voice];
+    return [voicesDictionary objectForKey:NSVoiceName];
+}
+                </code>
+                </pre>
+            </figure>
+            List of available voices is stored in <em>NSArray *voices</em>.
+            Method <em>numberOfRowsInTableView</em> gets number of records to be displayed from array <em>voices</em>.
+            Second method returns value of object that is in the specified row index in array <em>voices</em>.
+
+            <br><br>
+            In order to change the voice of speech synthesizer, based on selection in tableView,
+            method <em>tableViewSelectionDidChange</em> must be implemented.
+            <figure>
+                <figcaption></figcaption>
+                <pre class="prettyprint">
+                <code>
+                    //Tells the delegate that the table view’s selection has changed.
+                    - (void)tableViewSelectionDidChange:(NSNotification *)notification;
+                    {
+                        NSInteger row = [_tableView selectedRow];
+                        
+                        if (row == -1)
+                        {
+                            return;
+                        }
+                        
+                        NSString *selectedVoice = [voices objectAtIndex:row];
+                        [speechSynthesizer setVoice:selectedVoice];
+                    }
+                </code>
+                </pre>
+            </figure>
+        </p>
+        <h2>AppDelegate class complete implementation</h2>
+        <p>
+            <figure>
+                <figcaption>AppDelegate.h</figcaption>
+                <pre class="prettyprint">
+                <code>
+#import <Cocoa/Cocoa.h>
+
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSSpeechSynthesizerDelegate, NSTableViewDelegate>
+{
+    NSArray *voices;
+    NSSpeechSynthesizer *speechSynthesizer;
+}
+
+@property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSTextField *textField;
+@property (weak) IBOutlet NSButton *speakButton;
+@property (weak) IBOutlet NSButton *stopButton;
+@property (weak) IBOutlet NSTableView *tableView;
+
+- (IBAction)stop:(id)sender;
+- (IBAction)speak:(id)sender;
+
+@end
+                </code>
+                </pre>
+            </figure>
+            <figure>
+                <figcaption>AppDelegate.m</figcaption>
+                <pre class="prettyprint">
+                <code>
+#import "AppDelegate.h"
+
+@implementation AppDelegate
+
+//---------Events---------
+
+- (id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        speechSynthesizer = [[NSSpeechSynthesizer alloc] initWithVoice:nil];
+        [speechSynthesizer setDelegate:self];
+        
+        voices = [NSSpeechSynthesizer availableVoices];
+    }
+    
+    return self;
+}
+
+//Prepares the receiver for service after it has been loaded from an
+//Interface Builder archive, or nib file.
+- (void) awakeFromNib
+{
+    NSString *defaultVoice = [NSSpeechSynthesizer defaultVoice];
+    NSInteger defaultRow = [voices indexOfObject: defaultVoice];
+    NSIndexSet *indices = [NSIndexSet indexSetWithIndex:defaultRow];
+    [_tableView selectRowIndexes:indices byExtendingSelection:NO];
+    [_tableView scrollRowToVisible:defaultRow];
+}
+
+// Sent when an NSSpeechSynthesizer object finishes speaking through the sound output device.
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender
+        didFinishSpeaking:(BOOL)finishedSpeaking
+{
+    [_speakButton setEnabled:YES];
+    [_stopButton setEnabled:NO];
+    [_tableView setEnabled:YES];
+}
+
+//Returns the number of records managed for aTableView by the data source object.
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return (NSInteger)[voices count];
+}
+
+//Called by the table view to return the data object associated
+//with the specified row and column.
+- (id)tableView:(NSTableView *)tableView
+objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row
+{
+    NSString *voice = [voices objectAtIndex:row];
+    NSDictionary *voicesDictionary = [NSSpeechSynthesizer attributesForVoice:voice];
+    return [voicesDictionary objectForKey:NSVoiceName];
+}
+
+//Tells the delegate that the table view’s selection has changed.
+- (void)tableViewSelectionDidChange:(NSNotification *)notification;
+{
+    NSInteger row = [_tableView selectedRow];
+    
+    if (row == -1)
+    {
+        return;
+    }
+    
+    NSString *selectedVoice = [voices objectAtIndex:row];
+    [speechSynthesizer setVoice:selectedVoice];
+}
+
+//---------Functions---------
+- (IBAction)stop:(id)sender
+{
+    [speechSynthesizer stopSpeaking];
+}
+
+- (IBAction)speak:(id)sender
+{
+    NSString *str = [_textField stringValue];
+    
+    if ([str length] == 0)
+    {
+        return;
+    }
+    
+    [speechSynthesizer startSpeakingString:str];
+    
+    [_speakButton setEnabled:NO];
+    [_stopButton setEnabled:YES];
+    [_tableView setEnabled:NO];
+}
+@end
+                </code>
+                </pre>
+            </figure>
+        </p>
+</div>
+</div>
+</body>
+</html>
