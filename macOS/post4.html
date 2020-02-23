@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="../animate.css">
         <link rel="stylesheet" type="text/css" href="../styles.css">
         <link rel="stylesheet" type="text/css" href="../codestyle.css">
+        <link rel="stylesheet" type="text/css" href="../search.css">
     </head>
     <body class="otherPages">
         <nav class="navbar transparent navbar-inverse navbar-expand-sm navbar-dark">
@@ -65,11 +66,24 @@
                 <span class="closebtn" onclick="closeSearch()">x</span>
                 <div class="overlay-content">
                   <form>
-                    <input align="center" type="text" placeholder="Search for.." name="search">
+                      <div id="myDropdown" class="dropdown-content">
+                        <input class="dropdown-toggle" data-toggle="dropdown" type="text" placeholder="Search for.." name="search" id="myInput" onkeyup="filterFunction()">
+                        <ul class="dropdown-menu searchDropdown scrollable-menu customClassForDropDownScroll" role="menu">
+                            <li><a href="post1.html">Cocoa Web View</a></li>
+                            <li><a href="post2.html">Cocoa Web View Local File</a></li>
+                            <li><a href="post3.html">Cocoa Speech Synthesizer</a></li>
+                            <li><a href="post4.html">Cocoa Slider</a></li>
+                            <li><a href="#custom">Custom</a></li>
+                            <li><a href="#support">Support</a></li>
+                            <li><a href="#tools">Tools</a></li>
+                            <li><a href="#custom">Custom</a></li>
+                            <li><a href="#support">Support</a></li>
+                            <li><a href="#tools">Tools</a></li>
+                        </ul>
+                    </div>
                   </form>
                 </div>
-            </div>
-           
+              </div>
 <div class="containerPage row h-100 justify-content-center">
     <div class="col-sm-6" id="mainContent">
         <h1>Cocoa - Slider Binding</h1>
